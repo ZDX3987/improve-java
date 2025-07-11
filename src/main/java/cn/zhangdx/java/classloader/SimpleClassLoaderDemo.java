@@ -1,4 +1,4 @@
-package cn.zhangdx.classloader;
+package cn.zhangdx.java.classloader;
 
 /**
  * @author zhangdx

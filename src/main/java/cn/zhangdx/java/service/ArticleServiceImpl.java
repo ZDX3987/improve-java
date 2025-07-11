@@ -1,4 +1,4 @@
-package cn.zhangdx.service;
+package cn.zhangdx.java.service;
 
 /**
  * @author zhangdx

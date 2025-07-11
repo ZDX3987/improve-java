@@ -1,4 +1,4 @@
-package cn.zhangdx;
+package cn.zhangdx.java;
 
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;

@@ -1,6 +1,6 @@
-package cn.zhangdx.proxy;
+package cn.zhangdx.java.proxy;
 
-import cn.zhangdx.service.ArticleService;
+import cn.zhangdx.java.service.ArticleService;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

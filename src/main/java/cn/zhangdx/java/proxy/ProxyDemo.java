@@ -1,7 +1,7 @@
-package cn.zhangdx.proxy;
+package cn.zhangdx.java.proxy;
 
-import cn.zhangdx.service.ArticleService;
-import cn.zhangdx.service.ArticleServiceImpl;
+import cn.zhangdx.java.service.ArticleService;
+import cn.zhangdx.java.service.ArticleServiceImpl;
 
 import java.lang.reflect.Proxy;
 

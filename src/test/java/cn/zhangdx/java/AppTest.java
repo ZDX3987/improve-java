@@ -1,4 +1,4 @@
-package cn.zhangdx;
+package cn.zhangdx.java;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

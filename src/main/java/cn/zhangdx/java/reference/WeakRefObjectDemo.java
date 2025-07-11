@@ -1,4 +1,4 @@
-package cn.zhangdx.reference;
+package cn.zhangdx.java.reference;
 
 import java.lang.ref.WeakReference;
 
