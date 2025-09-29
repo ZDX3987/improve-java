@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
  * @author zhangdx
  * @date 2025/7/2 15:03
  */
-public class ArticleServiceProxy implements InvocationHandler {
+public class ArticleServiceInvocationHandler implements InvocationHandler {
 
     private ArticleService target;
 
@@ -19,9 +19,9 @@ public class ArticleServiceProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("ArticleServiceProxy 代理前通知");
+        System.out.println("ArticleServiceJDKProxy 代理前通知");
         Object result = method.invoke(target, args);
-        System.out.println("ArticleServiceProxy 代理后通知");
+        System.out.println("ArticleServiceJDKProxy 代理后通知");
         return result;
     }
 }
