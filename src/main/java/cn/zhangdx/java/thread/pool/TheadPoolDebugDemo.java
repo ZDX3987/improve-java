@@ -14,10 +14,10 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class TheadPoolDebugDemo {
 
-    private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2, 8, 60, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100));
+    private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2, 5, 60, TimeUnit.SECONDS, new ArrayBlockingQueue<>(10), new ThreadPoolExecutor.CallerRunsPolicy());
 
     public static void main(String[] args) {
-        int count = 6;
+        int count = 100;
         do {
             int no = 100 - count;
             threadPoolExecutor.execute(() -> {
@@ -32,7 +32,7 @@ public class TheadPoolDebugDemo {
             count--;
         } while (count > 0);
         System.out.println("执行完成");
-        threadPoolExecutor.shutdownNow();
+        threadPoolExecutor.shutdown();
         System.out.println("线程池已关闭: "+threadPoolExecutor.isTerminated());
     }
 }
