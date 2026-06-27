@@ -1,6 +1,8 @@
 package cn.zhangdx.java.thread.aqs;
 
-import java.time.LocalDateTime;
+import cn.zhangdx.java.util.ThreadUtil;
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -9,25 +11,20 @@ import java.time.format.DateTimeFormatter;
  * @author ZDX
  * @date 2025/10/27 12:32
  */
+@Slf4j
 public class DemoMutex {
 
     public static void main(String[] args) {
-        Mutex mutex = new Mutex();
-
-        for (int i = 0; i < 10; i++) {
+        boolean isShared = true;
+        Mutex mutex = isShared ? new Mutex(isShared, 3) : new Mutex();
+        for (int i = 0; i < 5; i++) {
             int finalI = i;
-            Runnable runnable = () -> {
+            new Thread(() -> {
                 mutex.lock();
-                try {
-                    Thread.sleep(2000);
-                    System.out.println(DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalTime.now()) + " - 第" + finalI + "个线程执行");
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                } finally {
-                    mutex.unlock();
-                }
-            };
-            new Thread(runnable).start();
+                ThreadUtil.sleep(1000);
+                log.info("第{}个线程执行中", (finalI + 1));
+                mutex.unlock();
+            }, "demo-thread-" + (i + 1)).start();
         }
     }
 }

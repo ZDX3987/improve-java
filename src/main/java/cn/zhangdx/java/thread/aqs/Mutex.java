@@ -13,9 +13,24 @@ import java.util.concurrent.locks.Lock;
  */
 public class Mutex implements Lock {
 
-    private final Sync sync = new Sync();
+    private boolean isShareLock;
+
+    private final Sync sync;
+
+    public Mutex() {
+        sync = new Sync(0);
+    }
+
+    public Mutex(boolean isShareLock, int shareCount) {
+        this.isShareLock = isShareLock;
+        sync = new Sync(shareCount);
+    }
 
     private static class Sync extends AbstractQueuedSynchronizer {
+
+        private Sync(int count) {
+            this.setState(count);
+        }
 
         @Override
         protected boolean isHeldExclusively() {
@@ -41,6 +56,22 @@ public class Mutex implements Lock {
             return false;
         }
 
+        @Override
+        protected int tryAcquireShared(int arg) {
+            int s = getState();
+            if (s == 0) {
+                return -1;
+            }
+            return compareAndSetState(s, s - arg) ? 1 : -1;
+        }
+
+        @Override
+        protected boolean tryReleaseShared(int arg) {
+            int s = getState();
+            boolean b = compareAndSetState(s, s + arg);
+            return b;
+        }
+
         Condition newCondition() {
             return new ConditionObject();
         }
@@ -48,7 +79,11 @@ public class Mutex implements Lock {
 
     @Override
     public void lock() {
-        sync.acquire(1);
+        if (isShareLock) {
+            sync.acquireShared(1);
+        } else {
+            sync.acquire(1);
+        }
     }
 
     @Override
@@ -68,7 +103,11 @@ public class Mutex implements Lock {
 
     @Override
     public void unlock() {
-        sync.release(1);
+        if (isShareLock) {
+            sync.releaseShared(1);
+        } else {
+            sync.release(1);
+        }
     }
 
     @Override
