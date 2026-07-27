@@ -1,4 +1,4 @@
-package cn.zhangdx.improve.virtual;
+package cn.zhangdx.improve.concurrency.virtual;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
