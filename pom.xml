@@ -11,6 +11,7 @@
   <url>http://maven.apache.org</url>
   <modules>
     <module>java-8</module>
+    <module>java-21</module>
   </modules>
 
   <properties>
