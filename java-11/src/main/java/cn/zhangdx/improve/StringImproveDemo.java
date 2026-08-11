@@ -1,4 +1,4 @@
-package cn.zhangdx.improve.java11;
+package cn.zhangdx.improve;
 
 /**
  * String增强
