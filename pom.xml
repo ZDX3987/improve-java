@@ -12,6 +12,7 @@
   <modules>
     <module>java-8</module>
     <module>java-21</module>
+      <module>java9-20</module>
   </modules>
 
   <properties>
