@@ -25,4 +25,10 @@ public class RecordClassDemo {
  * @param age
  */
 record RecordDemo(String name, int age, Set<String> roles) {
+
+    public RecordDemo {
+        if (roles == null || roles.isEmpty()) {
+            throw new RuntimeException("参数校验不通过");
+        }
+    }
 }
